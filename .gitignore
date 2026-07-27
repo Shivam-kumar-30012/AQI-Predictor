@@ -1,0 +1,15 @@
+# Don't commit large datasets - they don't belong in git history
+*.csv
+
+# Don't commit raw/sample data snapshots
+sample_raw_record.json
+sample_feature_row.json
+sample_raw_response.json
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Environment files (if you ever create one)
+.env
+tempCodeRunnerFile.py
