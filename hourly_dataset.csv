@@ -1,0 +1,2 @@
+timestamp,city,hour,day,month,day_of_week,is_weekend,temperature,humidity,pressure,wind_speed,wind_deg,clouds,pm10,no2,o3,co,so2,nh3,target_pm2_5
+2026-07-28T05:53:03.169976,Ghotki,5,28,7,1,0,39.65,33,996,4.5,171,53,130.14,0.88,59.38,108.38,2.32,4.96,33.72

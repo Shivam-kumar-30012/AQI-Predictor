@@ -1,15 +1,17 @@
-# Don't commit large datasets - they don't belong in git history
-*.csv
+# Don't commit the large historical backfill dataset - too big for git history
+aqi_historical_dataset.csv
+
+# DO track hourly_dataset.csv - this is our live growing dataset via GitHub Actions
 
 # Don't commit raw/sample data snapshots
 sample_raw_record.json
 sample_feature_row.json
 sample_raw_response.json
 
-# Python cache files
+# Python cache and temp files
 __pycache__/
 *.pyc
-
-# Environment files (if you ever create one)
-.env
 tempCodeRunnerFile.py
+
+# Environment files
+.env
