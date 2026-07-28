@@ -1,0 +1,33 @@
+name: Hourly AQI Data Collection
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run hourly collector
+        run: python hourly_collector.py
+
+      - name: Commit and push updated dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add hourly_dataset.csv
+          git commit -m "Hourly data collection: $(date -u +'%Y-%m-%d %H:%M UTC')" || echo "No changes to commit"
+          git push
