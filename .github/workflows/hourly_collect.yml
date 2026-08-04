@@ -22,7 +22,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests
+        run: pip install requests pandas
 
       - name: Run hourly collector
         run: python hourly_collector.py
