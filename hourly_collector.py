@@ -101,18 +101,23 @@ def build_feature_row(pollution: dict, weather: dict) -> dict:
 
 def append_row_to_csv(row: dict, filepath: str):
     """
-    Appends ONE row to the CSV.
-    Writes the header ONLY if the file doesn't already exist.
+    Appends ONE row to the CSV using pandas, which handles all
+    newline/formatting details correctly and consistently -
+    avoiding the manual byte-level bugs we ran into before.
     """
-    file_already_exists = os.path.exists(filepath)
+    import pandas as pd
 
-    with open(filepath, "a", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(row.keys()))
+    new_row_df = pd.DataFrame([row])
 
-        if not file_already_exists:
-            writer.writeheader()  # only write header on the very first run
-
-        writer.writerow(row)
+    if os.path.exists(filepath):
+        # Read existing file, add new row, rewrite cleanly.
+        # This guarantees consistent formatting every single time,
+        # regardless of what state the file was left in before.
+        existing_df = pd.read_csv(filepath)
+        combined_df = pd.concat([existing_df, new_row_df], ignore_index=True)
+        combined_df.to_csv(filepath, index=False)
+    else:
+        new_row_df.to_csv(filepath, index=False)
 
 
 def main():
