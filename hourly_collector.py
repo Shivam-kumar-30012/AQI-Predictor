@@ -12,6 +12,7 @@ import requests
 import csv
 import os
 from datetime import datetime
+from aqi_calculator import calculate_aqi
 
 # ---- CONFIG ----
 OW_API_KEY = "3f453341b725d1721e0dc64e136883cb"
@@ -88,7 +89,13 @@ def build_feature_row(pollution: dict, weather: dict) -> dict:
         "co": pollution["co"],
         "so2": pollution["so2"],
         "nh3": pollution["nh3"],
-        "target_pm2_5": pollution["pm2_5"],
+        "pm2_5": pollution["pm2_5"],
+        "target_aqi": calculate_aqi(
+            pm25=pollution["pm2_5"],
+            pm10=pollution["pm10"],
+            co=pollution["co"],
+            o3=pollution["o3"],
+        ),
     }
 
 

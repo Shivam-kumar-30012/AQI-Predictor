@@ -1,5 +1,7 @@
 # Don't commit the large historical backfill dataset - too big for git history
 aqi_historical_dataset.csv
+aqi_historical_dataset_clean.csv
+aqi_historical_dataset_final.csv
 
 # DO track hourly_dataset.csv - this is our live growing dataset via GitHub Actions
 
